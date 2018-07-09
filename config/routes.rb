@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/register', to: 'register#show'
   resources :users
+  get '/dashboard', to: 'dashboard#show'
 end

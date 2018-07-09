@@ -17,9 +17,9 @@ describe 'user can sign in' do
     # And when I fill in an email address (required)
     fill_in 'user[email]', with: email
     # And I fill in name (required)
-    fill_in :name, with: name
+    fill_in 'user[name]', with: name
     # And I fill in password and password confirmation (required)
-    fill_in :password, with: password
+    fill_in 'user[password]', with: password
     # And I click submit
     click_on 'Submit'
     # Then I should be redirected to "/dashboard"
@@ -28,6 +28,6 @@ describe 'user can sign in' do
     expect(page).to have_content("Logged in as #{name}")
     # And I should see "This account has not yet been activated. Please check your email."
     expect(page).to have_content("This account has not yet been activated. Please check your email.")
-    expect(User.find_by(name: name).verified).to be_false
+    expect(User.find_by(name: name).verified).to be_falsey
   end
 end
