@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     user.verified = false
     user.save
     session[:id] = user.id
+    VerificationMailer.verify(current_user).deliver_now
     redirect_to dashboard_path
   end
 

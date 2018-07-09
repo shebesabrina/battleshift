@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get '/register', to: 'register#show'
   resources :users
   get '/dashboard', to: 'dashboard#show'
+  resources :verification
 end
