@@ -7,7 +7,6 @@ describe 'user can sign in' do
     # When I visit "/"
     visit '/'
     # And I click "Register"
-    save_and_open_page
     click_on 'Register'
     # Then I should be on "/register"
     expect(current_path).to eq('/register')
