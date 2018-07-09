@@ -21,6 +21,7 @@ end
 
 group :test do
   gem 'simplecov'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -34,3 +35,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Added at 2018-07-09 14:57:07 -0600 by sabrinarobinson:
 gem "bcrypt", "~> 3.1"
+
+# Added at 2018-07-09 15:00:06 -0600 by sabrinarobinson:
+gem "pry", "~> 0.11.3"
