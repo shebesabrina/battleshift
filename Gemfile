@@ -38,3 +38,6 @@ gem "bcrypt", "~> 3.1"
 
 # Added at 2018-07-09 15:00:06 -0600 by sabrinarobinson:
 gem "pry", "~> 0.11.3"
+
+# Added at 2018-07-09 15:43:57 -0600 by sabrinarobinson:
+gem "capybara", "~> 3.3"

@@ -7,4 +7,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  root to: 'home#index'
+  get '/register', to: 'register#show'
+  resources :users
 end
