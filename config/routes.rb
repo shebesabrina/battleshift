@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'uesr/:id/dashboard', to: 'dashboard#show', as: :dashboard
+  get 'dashboard', to: 'dashboard#show'
   resources :verification
   get '/confirmation', to: 'confirmation#show'
 end
