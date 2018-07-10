@@ -9,8 +9,14 @@ Rails.application.routes.draw do
   end
   root to: 'home#index'
   get '/register', to: 'register#show'
-  resources :users
-  get '/dashboard', to: 'dashboard#show'
+
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
+
+  get 'dashboard', to: 'dashboard#show'
   resources :verification
   get '/confirmation', to: 'confirmation#show'
 end

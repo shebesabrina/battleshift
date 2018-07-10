@@ -16,7 +16,7 @@ describe 'A User' do
     fill_in 'user[name]', with: name
     fill_in 'user[password]', with: password
     click_on 'Submit'
-    
+
     user = User.find_by(name: name)
     confirmation_email = open_email(user.email)
     
