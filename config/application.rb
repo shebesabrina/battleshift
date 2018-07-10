@@ -46,6 +46,7 @@ module BattleshipWeb
     # -- all .rb files in that directory are automatically loaded.
 
     # Don't generate system test files.
+    config.action_mailer.default_url_options = { :host => 'https://shipsbattle.herokuapp.com' }
     config.generators.system_tests = nil
     config.assets.initialize_on_precompile = false
   end
