@@ -1,2 +1,4 @@
-<%= link_to  "Visit here to activate your account.", edit_verification_url(@user), params:{verification_token: @user.verification_token} %>
+<%= link_to  "Visit here to activate your account.",
+  edit_verification_url(@user),
+  params:{verification_token: @user.verification_token} %>
 Your Api Key:<%=@user.api_token%>

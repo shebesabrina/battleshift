@@ -24,7 +24,9 @@ describe 'A User' do
       confirmation_email = open_email(user.email)
 
       expect(confirmation_email).to have_link("Visit here to activate your account.",)
-      visit edit_verification_url(user)
+
+      visit edit_verification_url(id:user, verification_token:user.verification_token)
+      
       expect(current_path).to eq(confirmation_path)
       expect(page).to have_content("Thank you! Your account is now activated.")
 
