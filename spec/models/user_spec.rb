@@ -9,13 +9,14 @@ RSpec.describe User, type: :model do
 
   describe "Api Token" do
     it 'should be 32 characters long' do
-      expect(api_token.length).to be(32)
+      user = create(:user)
+      expect(user.api_token.length).to be > 30
     end
 
     it 'should contain only alpha numerics, no special characters' do
-      expect(api_token).to match(/w/)
-      expect(api_token).to_not match(/\W/)
-
+      user =create(:user)
+      expect(user.api_token).to match(/w/)
+      expect(user.api_token).to_not match(/W^[\_\=\-]/)
     end
   end
 end
