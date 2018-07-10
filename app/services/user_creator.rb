@@ -8,7 +8,7 @@ class UserCreator
     make_api_token
     make_verification_token
     if @user.save
-      VerificationMailer.verify(@user).deliver_now
+        VerificationMailer.verify(@user).deliver_now
       @user
     end
   end
