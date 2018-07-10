@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
   def create
-    user = User.new(user_params)
-    user.verified = false
-    if user.save
+    
+    if user ||= UserCreator.new(User.new(user_params)).execute
       session[:id] = user.id
-      VerificationMailer.verify(current_user).deliver_now
       redirect_to dashboard_path
     else
       flash[:error] = "Invalid information"
