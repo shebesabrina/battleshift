@@ -22,9 +22,8 @@ describe 'A User' do
 
       user = User.find_by(name: name)
       confirmation_email = open_email(user.email)
-      
-      expect(confirmation_email).to have_link("Visit here to activate your account.",
-                                              )
+
+      expect(confirmation_email).to have_link("Visit here to activate your account.",)
       visit edit_verification_url(user)
       expect(current_path).to eq(confirmation_path)
       expect(page).to have_content("Thank you! Your account is now activated.")
@@ -38,8 +37,8 @@ describe 'A User' do
       visit '/'
       click_on 'Register'
 
-      email ='test@email.com'
-      name = '$2Sal'
+      email ='another@email.com'
+      name = 'myname'
       password = 'password'
 
       fill_in 'user[email]', with: email
@@ -49,7 +48,6 @@ describe 'A User' do
 
       user = User.find_by(name: name)
       confirmation_email = open_email(user.email)
-      
       expect(confirmation_email).to have_content("Your Api Key:#{user.api_token}")
 
     end
