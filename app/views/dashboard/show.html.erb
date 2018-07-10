@@ -1,0 +1,9 @@
+<% if current_user %>
+  Logged in as
+  <%= current_user.name %>
+  <% if current_user.verified %>
+  Status: Active
+  <% else %>
+  This account has not yet been activated. Please check your email.
+  <% end %>
+<% end %>
