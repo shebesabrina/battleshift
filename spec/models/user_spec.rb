@@ -15,7 +15,6 @@ RSpec.describe User, type: :model do
 
     it 'should contain only alpha numerics, no special characters' do
       user =create(:user)
-      expect(user.api_token).to match(/w/)
       expect(user.api_token).to_not match(/W^[\_\=\-]/)
     end
   end
