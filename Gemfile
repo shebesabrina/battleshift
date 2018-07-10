@@ -42,3 +42,6 @@ gem "pry", "~> 0.11.3"
 
 # Added at 2018-07-09 15:43:57 -0600 by sabrinarobinson:
 gem "capybara", "~> 3.3"
+
+# Added at 2018-07-10 14:13:11 -0600 by zacharythomas:
+gem "figaro", "~> 1.1"
