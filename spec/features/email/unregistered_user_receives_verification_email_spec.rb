@@ -19,14 +19,11 @@ describe 'A User' do
     
     user = User.find_by(name: name)
     confirmation_email = open_email(user.email)
-    expect(confirmation_email).to have_body_text("Visit")
-    expect(confirmation_email).to have_body_text("here")
-    expect(confirmation_email).to have_body_text("to activate your account.")
     
-    require'pry';binding.pry
-    expect(confirmation_email).to have_selector("a[href='/verification/new.13']")
-    
-    expect(current_path).to eq(confirmation_path(user))
+    expect(confirmation_email).to have_link("Visit here to activate your account.",
+                                             )
+    visit edit_verification_url(user)
+    expect(current_path).to eq(confirmation_path)
     expect(page).to have_content("Thank you! Your account is now activated.")
 
     visit '/dashboard'
