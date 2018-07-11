@@ -1,9 +1,13 @@
 class SessionsController < ApplicationController
+
+  def new
+  end
+
+  def create
+  end
+
   def destroy
-    binding.pry
-    if current_user
-      session[:id] = nil
-    end
+    session[:user_id] = nil
     redirect_to root_url
   end
 end

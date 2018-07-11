@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     end
   end
   get 'logout', to: 'sessions#destroy'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+
   root to: 'home#index'
   get '/register', to: 'register#show'
   get 'dashboard', to: 'dashboard#show'
