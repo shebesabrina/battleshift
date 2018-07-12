@@ -23,6 +23,7 @@ end
 group :test do
   gem 'simplecov'
   gem 'shoulda-matchers'
+  gem "capybara", "~> 3.3"
 end
 
 group :development do
@@ -41,4 +42,3 @@ gem "bcrypt", "~> 3.1"
 gem "pry", "~> 0.11.3"
 
 # Added at 2018-07-09 15:43:57 -0600 by sabrinarobinson:
-gem "capybara", "~> 3.3"
