@@ -23,6 +23,7 @@ end
 group :test do
   gem 'simplecov'
   gem 'shoulda-matchers'
+  gem "capybara", "~> 3.3"
 end
 
 group :development do

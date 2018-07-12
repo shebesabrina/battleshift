@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def create
-    
+
     if user ||= UserCreator.new(User.new(user_params)).execute
       session[:id] = user.id
       redirect_to dashboard_path
@@ -13,6 +13,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

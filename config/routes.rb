@@ -7,16 +7,19 @@ Rails.application.routes.draw do
       end
     end
   end
-  root to: 'home#index'
-  get '/register', to: 'register#show'
+  resources :verification
 
   resources :users do
     member do
       get :confirm_email
     end
   end
+  get 'logout', to: 'sessions#destroy'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
 
+  root to: 'home#index'
+  get '/register', to: 'register#show'
   get 'dashboard', to: 'dashboard#show'
-  resources :verification
   get '/confirmation', to: 'confirmation#show'
 end
