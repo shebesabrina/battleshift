@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  def create
 
+  def create
+    # require'pry';binding.pry
     if user ||= UserCreator.new(User.new(user_params)).execute
       session[:id] = user.id
       redirect_to dashboard_path

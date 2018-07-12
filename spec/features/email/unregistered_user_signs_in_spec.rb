@@ -19,6 +19,8 @@ describe 'user can sign in' do
     fill_in 'user[name]', with: name
     # And I fill in password and password confirmation (required)
     fill_in 'user[password]', with: password
+
+    fill_in 'user[password_confirmation]', with: password
     # And I click submit
     click_on 'Submit'
     # Then I should be redirected to "/dashboard"
