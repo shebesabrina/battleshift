@@ -1,7 +1,7 @@
 class Game < ApplicationRecord
   attr_accessor :messages
-  belongs_to :player_1, class_name: "User"
-  belongs_to :player_2, class_name: "User"
+  has_many :participants
+  has_many :users, through: :participants
 
   enum current_turn: ["player_1", "player_2"]
   serialize :player_1_board

@@ -15,8 +15,6 @@ describe "Api::V1::Shots" do
       user = User.new(user_attributes)
       user.save!
       create(:game,
-        player_1: user,
-        player_2: user,
         player_1_board: player_1_board,
         player_2_board: player_2_board
       )
@@ -78,9 +76,7 @@ describe "Api::V1::Shots" do
         user = User.new(user_attributes)
         user.save!
       game = create(:game, player_1_board: player_1_board,
-                           player_2_board: player_2_board,
-                           player_1: user,
-                           player_2: user)
+                           player_2_board: player_2_board)
 
       headers = { "CONTENT_TYPE" => "application/json" }
       json_payload = {target: "B1"}.to_json
