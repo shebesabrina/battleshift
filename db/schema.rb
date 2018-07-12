@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(version: 20180712195236) do
     t.integer "current_turn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "player_1_id"
+    t.bigint "player_2_id"
+    t.index ["player_1_id"], name: "index_games_on_player_1_id"
+    t.index ["player_2_id"], name: "index_games_on_player_2_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -47,6 +51,8 @@ ActiveRecord::Schema.define(version: 20180712195236) do
     t.string "api_token"
   end
 
+  add_foreign_key "games", "users", column: "player_1_id"
+  add_foreign_key "games", "users", column: "player_2_id"
   add_foreign_key "participants", "games"
   add_foreign_key "participants", "users"
 end
