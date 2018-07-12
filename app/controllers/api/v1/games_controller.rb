@@ -9,7 +9,7 @@ class Api::V1::GamesController < ApiController
 
     if game
       render json: game
-    else 
+    else
       render json: error
     end
   end
@@ -25,10 +25,7 @@ class Api::V1::GamesController < ApiController
   private
 
   def find_opponent
-    if opp_email && set_opp
-    else
-      render :error
-    end
+    render :error unless opp_email && set_opp
   end
 
   def opp_email
