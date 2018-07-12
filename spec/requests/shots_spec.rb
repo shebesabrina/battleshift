@@ -6,7 +6,17 @@ describe "Api::V1::Shots" do
     let(:player_2_board)   { Board.new(4) }
     let(:sm_ship) { Ship.new(2) }
     let(:game)    {
+      user_attributes = {
+        name:'the best user',
+        email:'someone@email.com',
+        password:'password',
+        verified:true
+       }
+      user = User.new(user_attributes)
+      user.save!
       create(:game,
+        player_1: user,
+        player_2: user,
         player_1_board: player_1_board,
         player_2_board: player_2_board
       )
@@ -59,7 +69,18 @@ describe "Api::V1::Shots" do
     it "updates the message but not the board with invalid coordinates" do
       player_1_board = Board.new(1)
       player_2_board = Board.new(1)
-      game = create(:game, player_1_board: player_1_board, player_2_board: player_2_board)
+      user_attributes = {
+        name:'the best user',
+        email:'someone@email.com',
+        password:'password',
+        verified:true
+       }
+        user = User.new(user_attributes)
+        user.save!
+      game = create(:game, player_1_board: player_1_board,
+                           player_2_board: player_2_board,
+                           player_1: user,
+                           player_2: user)
 
       headers = { "CONTENT_TYPE" => "application/json" }
       json_payload = {target: "B1"}.to_json

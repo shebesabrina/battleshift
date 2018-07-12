@@ -32,18 +32,32 @@ describe 'GET /api/v1/games/1' do
                      end_space: "D1"
                     ).run
 
-      game_attributes = {
-                      player_1_board: player_1_board,
-                      player_2_board: player_2_board,
-                      player_1_turns: 0,
-                      player_2_turns: 0,
-                      current_turn: "player_1"
-                    }
+    user_attributes = {
+                      name:'the best user',
+                      email:'someone@email.com',
+                      password:'password',
+                      verified:true
+                     }
+    user = User.new(user_attributes)
+    user.save!
 
+    game_attributes = {
+                    player_1_board: player_1_board,
+                    player_2_board: player_2_board,
+                    player_1_turns: 0,
+                    player_2_turns: 0,
+                    current_turn: "player_1",
+                    player_1: user,
+                    player_2:  user
+                  }
+
+
+      
       game = Game.new(game_attributes)
       game.save!
 
       get "/api/v1/games/#{game.id}"
+      # , nil, {'X-API_TOKEN' => user.api_token}
 
       actual  = JSON.parse(response.body, symbolize_names: true)
       expected = Game.last
