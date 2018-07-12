@@ -6,6 +6,7 @@ describe "Api::V1::Shots" do
     let(:player_2_board)   { Board.new(4) }
     let(:sm_ship) { Ship.new(2) }
     let(:game)    {
+
       user_attributes = {
         name:'the best user',
         email:'someone@email.com',
@@ -14,6 +15,7 @@ describe "Api::V1::Shots" do
        }
       user = User.new(user_attributes)
       user.save!
+      
       create(:game,
         player_1_board: player_1_board,
         player_2_board: player_2_board

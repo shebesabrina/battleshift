@@ -9,4 +9,12 @@ class Game < ApplicationRecord
 
   validates :player_1_board, presence: true
   validates :player_2_board, presence: true
+
+  def player_1
+    users.joins(:participants).where(participants: {role:0})
+  end
+
+  def player_2
+    users.joins(:participants).where(participants: {role:1})
+  end
 end

@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  # before_save :api_token_creation
   has_secure_password
+  has_many :participants
+  has_many :games, through: :participants
+  
   validates_presence_of :name, :email, :password_digest
   validates_uniqueness_of :api_token, :verification_token
   validates_confirmation_of :password_confirmation
@@ -11,11 +13,5 @@ class User < ApplicationRecord
     end
   end
 
-
-  # def api_token_creation
-  #   # if api_token.nil?
-  #   #   self.api_token = SecureRandom.urlsafe_base64(30).to_s
-  #   # end
-  # end
 
 end
