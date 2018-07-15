@@ -8,12 +8,16 @@ class Space
   end
 
   def attack!
-    @status = if contents && not_attacked?
-                contents.attack!
-                "Hit"
-              else
-                "Miss"
-              end
+    @status = set_stat
+  end
+
+  def set_stat
+    if contents && not_attacked?
+      contents.attack!
+      "Hit"
+    else
+      "Miss"
+    end
   end
 
   def occupy!(ship)

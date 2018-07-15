@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180712195236) do
+ActiveRecord::Schema.define(version: 20180715221715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,16 +18,12 @@ ActiveRecord::Schema.define(version: 20180712195236) do
   create_table "games", force: :cascade do |t|
     t.text "player_1_board"
     t.text "player_2_board"
-    t.integer "winner"
+    t.string "winner"
     t.integer "player_1_turns"
     t.integer "player_2_turns"
     t.integer "current_turn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "player_1_id"
-    t.bigint "player_2_id"
-    t.index ["player_1_id"], name: "index_games_on_player_1_id"
-    t.index ["player_2_id"], name: "index_games_on_player_2_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -51,8 +47,6 @@ ActiveRecord::Schema.define(version: 20180712195236) do
     t.string "api_token"
   end
 
-  add_foreign_key "games", "users", column: "player_1_id"
-  add_foreign_key "games", "users", column: "player_2_id"
   add_foreign_key "participants", "games"
   add_foreign_key "participants", "users"
 end

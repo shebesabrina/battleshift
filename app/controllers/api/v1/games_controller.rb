@@ -4,8 +4,8 @@ class Api::V1::GamesController < ApiController
     find_opponent
     player_1_board = Board.new
     player_2_board = Board.new
-    game = @user.games.create(player_1_board: player_1_board, player_2_board: player_2_board, player_1_turns: 0, player_2_turns: 0, current_turn: "player_1")
-    game.participants.create(user: @opponent)
+    game = @user.games.find_or_create_by(player_1_board: player_1_board, player_2_board: player_2_board, player_1_turns: 0, player_2_turns: 0, current_turn: "player_1", winner: nil)
+    game.participants.find_or_create_by(user: @opponent, role: 1)
 
     if game
       puts 'game success'
