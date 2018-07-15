@@ -33,6 +33,7 @@ describe "Api::V1::Shots" do
       json_payload = {target: "A1"}.to_json
 
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
+      require'pry';binding.pry
 
       expect(response).to be_success
 
