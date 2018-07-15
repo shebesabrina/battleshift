@@ -14,6 +14,19 @@ class Game < ApplicationRecord
     users.count < 2
   end
   
+  def over?
+    check_winner
+    !self.winner.nil?
+  end
+
+  def check_winner
+    if player_1_board.is_lost?
+      self.winner = "player_2"
+    elsif player_2_board.is_lost?
+      self.winner = "player_1"
+    end
+  end
+  
   def switch_turn
     if self.current_turn == "player_1"
       self.current_turn = "player_2"

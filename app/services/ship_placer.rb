@@ -54,7 +54,6 @@ class ShipPlacer
     raise InvalidShipPlacement unless range.count == ship.length
     range.each { |row| place_ship(row, column) }
     @board.place(@ship)
-    require'pry';binding.pry
   end
 
   def place_ship(row, column)

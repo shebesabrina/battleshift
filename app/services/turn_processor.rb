@@ -5,7 +5,6 @@ class TurnProcessor
     @target = target
     @messages = []
     @status = 200
-    # require'pry';binding.pry
   end
 
   def run!
@@ -13,7 +12,7 @@ class TurnProcessor
       attack_opponent
       ai_attack_back if @game.vs_ai?
       game.save!
-    rescue InvalidAttack => e 
+    rescue InvalidAttack => e
       @messages << e.message
       @status = 400
     end
@@ -31,6 +30,7 @@ class TurnProcessor
     result = Shooter.fire!(board: opponent.board, target: target)
     @messages << "Your shot resulted in a #{result[:space_status]}."
     @messages << "Battleship sunk." if result[:is_sunk]
+    @messages << "Game over." if @game.over?
     game.player_1_turns += 1
     game.switch_turn
     game.save!
