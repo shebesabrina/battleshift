@@ -54,7 +54,7 @@ describe 'GET /api/v1/games/1' do
       game.save!
       game.participants.create!(user:user)
 
-      get "/api/v1/games/#{game.id}", params:{}, headers: {'X-API_TOKEN' => user.api_token}
+      get "/api/v1/games/#{game.id}", params:{}, headers: {'X-API_KEY' => user.api_token}
 
       actual  = JSON.parse(response.body, symbolize_names: true)
       expected = Game.last
