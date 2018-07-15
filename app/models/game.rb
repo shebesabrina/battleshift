@@ -10,11 +10,23 @@ class Game < ApplicationRecord
   validates :player_1_board, presence: true
   validates :player_2_board, presence: true
 
+  def vs_ai?
+    users.count < 2
+  end
+  
+  def switch_turn
+    if self.current_turn == "player_1"
+      self.current_turn = "player_2"
+    else
+      self.current_turn = "player_1"
+    end
+  end
+
   def player_1
-    users.joins(:participants).where(participants: {role:0})
+    users.joins(:participants).where(participants: {role:0}).first
   end
 
   def player_2
-    users.joins(:participants).where(participants: {role:1})
+    users.joins(:participants).where(participants: {role:1}).first
   end
 end

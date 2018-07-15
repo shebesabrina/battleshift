@@ -5,7 +5,7 @@ class Api::V1::GamesController < ApiController
     player_1_board = Board.new
     player_2_board = Board.new
     game = @user.games.create(player_1_board: player_1_board, player_2_board: player_2_board, player_1_turns: 0, player_2_turns: 0, current_turn: "player_1")
-    game.participants.create(user: @opponent)
+    game.participants.create(user: @opponent, role: 1)
 
     if game
       puts 'game success'
