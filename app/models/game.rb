@@ -21,9 +21,9 @@ class Game < ApplicationRecord
 
   def check_winner
     if player_1_board.is_lost?
-      self.winner = "player_2"
+      self.winner = player_2.email
     elsif player_2_board.is_lost?
-      self.winner = "player_1"
+      self.winner = player_1.email
     end
   end
   
