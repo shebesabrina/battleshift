@@ -8,8 +8,10 @@ class Api::V1::GamesController < ApiController
     game.participants.create(user: @opponent)
 
     if game
+      puts 'game success'
       render json: game
-    else 
+    else
+      puts 'error'
       render json: error
     end
   end
@@ -25,10 +27,7 @@ class Api::V1::GamesController < ApiController
   private
 
   def find_opponent
-    if opp_email && set_opp
-    else
-      render :error
-    end
+    render :error unless opp_email && set_opp
   end
 
   def opp_email
