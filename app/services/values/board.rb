@@ -110,7 +110,7 @@ class Board
   end
 
   def set_space_occupied(coordinate)
-    get_space(coordinate).occupied = true
+    locate_space(coordinate).occupied = true
   end
 
   # def set_spaces_occupied(coordinate1, coordinate2)
@@ -130,7 +130,7 @@ class Board
   end
 
   def set_space_attacked(coordinate)
-    get_space(coordinate).attacked = true
+    locate_space(coordinate).attacked = true
   end
 
   def has_north_neighbor?(coordinate)
@@ -190,11 +190,11 @@ class Board
   end
 
   def space_occupied?(coordinate)
-     get_space(coordinate).occupied
+     locate_space(coordinate).occupied
   end
 
   def space_attacked?(coordinate)
-    get_space(coordinate).attacked
+    locate_space(coordinate).attacked
   end
 
   def contains_hit?(coordinate)
