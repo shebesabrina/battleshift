@@ -28,7 +28,8 @@ class TurnProcessor
 
   def attack_opponent
     result = Shooter.fire!(board: opponent.board, target: target)
-    @messages << "Your shot resulted in a #{result}."
+    @messages << "Your shot resulted in a #{result[:space_status]}."
+    @messages << "Battleship sunk." if result[:is_sunk]
     game.player_1_turns += 1
     game.switch_turn
     game.save!
