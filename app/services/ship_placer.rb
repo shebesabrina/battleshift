@@ -1,9 +1,19 @@
 class ShipPlacer
-  def initialize(board, ship, start_space, end_space)
-    @board       = board
-    @ship        = ship
-    @start_space = start_space
-    @end_space   = end_space
+  def initialize(params)
+    @board       = params[:board]
+    @ship        = params[:ship]
+    @start_space = params[:start_space]
+    @end_space   = params[:end_space]
+    @valid = true
+  end
+
+  def message
+    if @valid
+      "Successfully placed the ship"
+    # "You have #{1} ship(s) to place with a size of #{ship}."
+    else
+      "Invalide ship placement"
+    end
   end
 
   def run
