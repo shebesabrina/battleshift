@@ -1,7 +1,6 @@
 class Api::V1::GamesController < ApiController
 
   def create
-    # binding.pry
     find_opponent
     player_1_board = Board.new
     player_2_board = Board.new

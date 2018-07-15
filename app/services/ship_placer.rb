@@ -8,17 +8,17 @@ class ShipPlacer
   end
 
   def message
-    if @valid
-      "Successfully placed the ship"
-    # "You have #{1} ship(s) to place with a size of #{ship}."
+    if @board.ships.length > 0
+    "Successfully placed ship with a size of #{@ship.length}. You have #{@board.ships.length} ship(s) to place with a size of #{@board.ships[0]}."
     else
-      "Invalide ship placement"
-    end
+    "Successfully placed ship with a size of #{@ship.length}. You have #{@board.ship.length} ship(s) to place."
+   end
   end
 
   def run
     if same_row?
       place_in_row
+
     elsif same_column?
       place_in_column
     else
@@ -44,6 +44,7 @@ class ShipPlacer
     msg = "Ship size must be equal to the number of spaces you are trying to fill."
     raise InvalidShipPlacement unless range.count == ship.length
     range.each { |column| place_ship(row, column) }
+    @board.place(@ship.length)
   end
 
   def place_in_column
@@ -51,6 +52,7 @@ class ShipPlacer
     range   = start_space[0]..end_space[0]
     raise InvalidShipPlacement unless range.count == ship.length
     range.each { |row| place_ship(row, column) }
+    @board.place(@ship.length)
   end
 
   def place_ship(row, column)

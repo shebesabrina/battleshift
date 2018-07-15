@@ -1,10 +1,16 @@
 class Board
   attr_reader :length,
-              :board
+              :board,
+              :ships
 
   def initialize(length = 4)
     @length = length
     @board = create_grid
+    @ships = [2,3]
+  end
+
+  def place(ship)
+    @ships.delete(ship)
   end
 
   def get_row_letters
