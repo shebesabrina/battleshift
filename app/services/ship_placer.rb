@@ -1,4 +1,5 @@
 class ShipPlacer
+  attr_reader :board
   def initialize(params)
     @board       = params[:board]
     @ship        = params[:ship]
@@ -11,7 +12,7 @@ class ShipPlacer
     if @board.ships.length > 0
     "Successfully placed ship with a size of #{@ship.length}. You have #{@board.ships.length} ship(s) to place with a size of #{@board.ships[0]}."
     else
-    "Successfully placed ship with a size of #{@ship.length}. You have #{@board.ship.length} ship(s) to place."
+    "Successfully placed ship with a size of #{@ship.length}. You have #{@board.ships.length} ship(s) to place."
    end
   end
 

@@ -5,7 +5,7 @@ class Api::V1::Games::ShipsController < ApiController
     game = @user.games.find(params["game_id"])
     placer = ShipPlacer.new(board: game.player_1_board, ship: ship, start_space: params["start_space"], end_space: params["end_space"])
     placer.run
-    binding.pry
+    game.save
     render json: game, status: 200, message: placer.message
   end
 end
