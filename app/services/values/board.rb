@@ -1,16 +1,22 @@
 class Board
   attr_reader :length,
               :board,
-              :ships
+              :ship_types_left
 
   def initialize(length = 4)
     @length = length
     @board = create_grid
-    @ships = [2,3]
+    @ship_types_left = [2,3]
+    @ships = []
   end
 
   def place(ship)
-    @ships.delete(ship)
+    @ship_types_left.delete(ship.length)
+    @ships << ship
+  end
+
+  def is_lost?
+    @ships.all?(&:is_sunk?)
   end
 
   def get_row_letters

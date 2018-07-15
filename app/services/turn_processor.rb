@@ -5,6 +5,7 @@ class TurnProcessor
     @target = target
     @messages = []
     @status = 200
+    # require'pry';binding.pry
   end
 
   def run!
