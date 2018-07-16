@@ -14,11 +14,11 @@ class UserCreator
   end
 
   def make_api_token
-    @user.verification_token ||= SecureRandom.urlsafe_base64.to_s
+    @user.api_token ||= SecureRandom.urlsafe_base64(30).to_s
   end
 
   def make_verification_token
-    @user.api_token ||= SecureRandom.urlsafe_base64(30).to_s
+    @user.verification_token ||= SecureRandom.urlsafe_base64.to_s
   end
 
 

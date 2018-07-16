@@ -10,7 +10,9 @@ class TurnProcessor
   def run!
     begin
       attack_opponent
-      ai_attack_back if @game.vs_ai?
+      if @game.vs_ai?
+        ai_attack_back 
+      end
       game.save!
     rescue InvalidAttack => e
       @messages << e.message
@@ -40,6 +42,8 @@ class TurnProcessor
     result = AiSpaceSelector.new(player.board).fire!
     @messages << "The computer's shot resulted in a #{result}."
     game.player_2_turns += 1
+    game.switch_turn
+    game.save
   end
 
   def player

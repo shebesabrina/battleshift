@@ -7,11 +7,5 @@ class User < ApplicationRecord
   validates_uniqueness_of :api_token, :verification_token
   validates_confirmation_of :password_confirmation
 
-  def confirmation_token
-    if verification_token.nil?
-      self.verification_token = SecureRandom.urlsafe_base64.to_s
-    end
-  end
-
 
 end

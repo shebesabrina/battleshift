@@ -4,8 +4,7 @@ class ApiController < ActionController::API
   def api_auth
     if header_api_key && set_user
     else
-      # still need to create error response for non auth api key
-      # render json :error
+      render json: ("Error, Invalid Api Token").to_json, status: 400
     end
   end
 
