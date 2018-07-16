@@ -136,6 +136,7 @@ describe "Api::V1::Shots" do
       user = User.new(user_attributes)
       uc = UserCreator.new(user)
       uc.make_api_token
+      uc.make_verification_token
       user.save!
        
       game_attributes = {

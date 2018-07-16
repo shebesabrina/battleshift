@@ -2,7 +2,21 @@ require 'rails_helper'
 
 describe 'Registered User' do
   it 'should be able to login' do
-    user = create(:user)
+    user_attributes = {
+      name:'the best user',
+      email:'someone@email.com',
+      password:'password',
+      verified:true
+     }
+    user = User.new(user_attributes)
+    
+  
+    uc = UserCreator.new(user)
+
+    uc.make_api_token
+    uc.make_verification_token
+    user.save!
+
     visit '/'
 
     click_on 'Log in'
@@ -16,7 +30,17 @@ describe 'Registered User' do
   end
 
   it 'should be able to logout' do
-    user = create(:user)
+    user_attributes = {
+      name:'the best user',
+      email:'someone@email.com',
+      password:'password',
+      verified:true
+     }
+    user = User.new(user_attributes)
+    uc = UserCreator.new(user)
+    uc.make_api_token
+    uc.make_verification_token
+    user.save!
     visit '/'
 
     click_on 'Log in'

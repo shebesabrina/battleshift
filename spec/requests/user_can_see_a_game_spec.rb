@@ -33,14 +33,18 @@ describe 'GET /api/v1/games/1' do
                     ).run
 
     user_attributes = {
-                      name:'the best user',
-                      email:'someone@email.com',
-                      password:'password',
-                      verified:true
-                     }
+      name:'the best user',
+      email:'someone@email.com',
+      password:'password',
+      verified:true
+      }
     user = User.new(user_attributes)
+    
+  
     uc = UserCreator.new(user)
+
     uc.make_api_token
+    uc.make_verification_token
     user.save!
 
     game_attributes = {

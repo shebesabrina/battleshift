@@ -18,8 +18,9 @@ describe "Api::V1::games" do
         uc1 = UserCreator.new(user1)
 
         uc1.make_api_token
+        uc1.make_verification_token
 
-        user1.save
+        user1.save!
 
         game_attributes = {
           player_1_board: player_1_board,
@@ -53,9 +54,10 @@ describe "Api::V1::games" do
 
         uc1 = UserCreator.new(user1)
 
+        uc1.make_verification_token
         uc1.make_api_token
 
-        user1.save
+        user1.save!
 
         user2_attributes = {
           name:'the best user',
@@ -83,6 +85,23 @@ describe "Api::V1::games" do
         game = user1.games.create!(game_attributes)
 
         get "/api/v1/games/#{game.id}", headers: {'X-API-Key' => user2.api_token}
+
+        expect(response.status).to eq(400)
+        expect(response.body).to include("Error, Invalid Api Token")
+
+        ship_1_payload = {
+          ship_size: 3,
+          start_space: "A1",
+          end_space: "A3"
+        }.to_json
+
+        post "/api/v1/games/#{game.id}/ships", params: ship_1_payload, headers: {'X-API-Key' => user2.api_token}
+
+        expect(response.status).to eq(400)
+        expect(response.body).to include("Error, Invalid Api Token")
+
+        post "/api/v1/games/#{game.id}/shots", params: {target: "A1"}.to_json, headers: {'X-API-Key' => user2.api_token}
+
 
         expect(response.status).to eq(400)
         expect(response.body).to include("Error, Invalid Api Token")
