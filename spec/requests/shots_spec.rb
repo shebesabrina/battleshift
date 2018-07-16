@@ -15,7 +15,6 @@ describe "Api::V1::Shots" do
         ship: sm_ship,
         start_space: "A1",
         end_space: "A2").run
-      game = create(:game, player_1_board: player_1_board, player_2_board: player_2_board)
 
       user_attributes = {
         name:'the best user',
@@ -32,18 +31,25 @@ describe "Api::V1::Shots" do
       uc.make_verification_token
       @user.save!
 
+      game_attributes = {
+        player_1_board: player_1_board,
+        player_2_board: player_2_board,
+        player_1_turns: 0,
+        player_2_turns: 0,
+        current_turn: "player_1"
+      }
+
+      game = @user.games.create!(game_attributes)
+
       allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
 
       
-                    
-      headers = { "CONTENT_TYPE" => "application/json", 'X-API_KEY' => @user.api_token }
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => @user.api_token }
 
       json_payload = {target: "A1"}.to_json
 
-
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
-      
       expect(response).to be_success
 
       game = JSON.parse(response.body, symbolize_names: true)
@@ -57,7 +63,7 @@ describe "Api::V1::Shots" do
     end
 
     it "updates the message and board with a miss" do
-      game = create(:game, player_1_board: player_1_board, player_2_board: player_2_board)
+
 
       user_attributes = {
         name:'the best user',
@@ -71,11 +77,23 @@ describe "Api::V1::Shots" do
       uc.make_api_token
       uc.make_verification_token
       user.save!
+
+      game_attributes = {
+        player_1_board: player_1_board,
+        player_2_board: player_2_board,
+        player_1_turns: 0,
+        player_2_turns: 0,
+        current_turn: "player_1"
+      }
+
+      game = user.games.create!(game_attributes)
+
       allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
 
-      headers = { "CONTENT_TYPE" => "application/json",'X-API_KEY' => user.api_token }
+      headers = { "CONTENT_TYPE" => "application/json","X-API-Key" => user.api_token }
       json_payload = {target: "A1"}.to_json
 
+      
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
       expect(response).to be_success
@@ -114,16 +132,29 @@ describe "Api::V1::Shots" do
         password:'password',
         verified:true
        }
-        user = User.new(user_attributes)
-        user.save!
-      game = create(:game, player_1_board: player_1_board,
-                           player_2_board: player_2_board)
 
-      headers = { "CONTENT_TYPE" => "application/json", 'X-API_KEY' => user.api_token }
+      user = User.new(user_attributes)
+      uc = UserCreator.new(user)
+      uc.make_api_token
+      user.save!
+       
+      game_attributes = {
+        player_1_board: player_1_board,
+        player_2_board: player_2_board,
+        player_1_turns: 0,
+        player_2_turns: 0,
+        current_turn: "player_1"
+      }
+
+      game = user.games.create!(game_attributes)
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => user.api_token }
       json_payload = {target: "B1"}.to_json
+
+
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
       game = JSON.parse(response.body, symbolize_names: true)
+
       expect(game[:message]).to eq "Invalid coordinates."
     end
 

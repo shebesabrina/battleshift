@@ -39,6 +39,8 @@ describe 'GET /api/v1/games/1' do
                       verified:true
                      }
     user = User.new(user_attributes)
+    uc = UserCreator.new(user)
+    uc.make_api_token
     user.save!
 
     game_attributes = {
@@ -50,11 +52,9 @@ describe 'GET /api/v1/games/1' do
                   }
 
 
-      game = Game.new(game_attributes)
-      game.save!
-      game.participants.create!(user:user)
+      game = user.games.create(game_attributes)
 
-      get "/api/v1/games/#{game.id}", params:{}, headers: {'X-API_KEY' => user.api_token}
+      get "/api/v1/games/#{game.id}", headers: {'X-API-Key' => user.api_token}
 
       actual  = JSON.parse(response.body, symbolize_names: true)
       expected = Game.last
