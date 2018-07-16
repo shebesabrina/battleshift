@@ -22,7 +22,7 @@ class Game < ApplicationRecord
   def check_winner
     if player_1_board.is_lost?
       unless vs_ai?
-        self.winner = player_2.email
+        self.winner = player_2.emailq
       else 
         self.winner = "Computer"
       end

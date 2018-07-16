@@ -5,12 +5,16 @@ describe "Api::V1::Shots" do
     let(:player_1_board)   { Board.new(4) }
     let(:player_2_board)   { Board.new(4) }
     let(:sm_ship) { Ship.new(2) }
-    let(:game) {create(:game,
-        player_1_board: player_1_board,
-        player_2_board: player_2_board)
-              }
+    # let(:game) {create(:game,
+    #     player_1_board: player_1_board,
+    #     player_2_board: player_2_board)
+    #           }
 
     it "updates the message and board with a hit" do
+      ShipPlacer.new(board: player_2_board,
+        ship: sm_ship,
+        start_space: "A1",
+        end_space: "A2").run
       game = create(:game, player_1_board: player_1_board, player_2_board: player_2_board)
 
       user_attributes = {
@@ -19,22 +23,24 @@ describe "Api::V1::Shots" do
         password:'password',
         verified:true
        }
-      user = User.new(user_attributes)
-      uc = UserCreator.new(user)
+      @user = User.new(user_attributes)
+      
+    
+      uc = UserCreator.new(@user)
 
       uc.make_api_token
       uc.make_verification_token
-      user.save!
-      allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
-      ShipPlacer.new(board: player_2_board,
-                     ship: sm_ship,
-                     start_space: "A1",
-                     end_space: "A2").run
+      @user.save!
 
-      headers = { "CONTENT_TYPE" => "application/json", 'X-API_KEY' => user.api_token }
+      allow_any_instance_of(AiSpaceSelector).to receive(:fire!).and_return("Miss")
+
+      
+                    
+      headers = { "CONTENT_TYPE" => "application/json", 'X-API_KEY' => @user.api_token }
 
       json_payload = {target: "A1"}.to_json
-        
+
+
       post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
 
       

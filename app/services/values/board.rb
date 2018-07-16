@@ -16,7 +16,9 @@ class Board
   end
 
   def is_lost?
-    @ships.all?(&:is_sunk?)
+    unless @ships.empty?
+      @ships.all?(&:is_sunk?)
+    end
   end
 
   def get_row_letters
