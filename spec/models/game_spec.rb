@@ -47,6 +47,18 @@ RSpec.describe Game, type: :model do
 
         user.save!
 
+        user2_attributes = {
+          name:'the best user2',
+          email:'someone@email.com',
+          password:'password',
+          verified:true
+         }
+        user2 = User.new(user2_attributes)
+        uc2 = UserCreator.new(user2)
+        uc2.make_api_token
+        uc2.make_verification_token
+
+        user2.save!
 
         game_attributes = {
           player_1_board: player_1_board,
@@ -57,6 +69,9 @@ RSpec.describe Game, type: :model do
         }
 
         game = user.games.create!(game_attributes)
+        game.participants.create(user: user2, role: "player_2")
+        
+        expect(game.vs_ai?).to eq(false)
 
       end
     end
